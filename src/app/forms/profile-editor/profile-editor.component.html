@@ -1,0 +1,192 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <fieldset>
+    <legend>Profile Editor FormGroup</legend>
+    <div class="mb-3">
+      <label for="first-name" class="form-label">First Name:</label>
+      <input
+        id="first-name"
+        type="text"
+        formControlName="firstName"
+        class="form-control"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="last-name" class="form-label">Last Name:</label>
+      <input
+        id="last-name"
+        type="text"
+        formControlName="lastName"
+        class="form-control"
+      />
+    </div>
+
+    <div formGroupName="address">
+      <legend>Address</legend>
+      <div class="mb-3">
+        <label for="street" class="form-label">Street: </label>
+        <input
+          id="street"
+          type="text"
+          formControlName="street"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="city" class="form-label">City: </label>
+        <input
+          id="city"
+          type="text"
+          formControlName="city"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="state" class="form-label">State: </label>
+        <input
+          id="state"
+          type="text"
+          formControlName="state"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="zip" class="form-label">Zip Code: </label>
+        <input
+          id="zip"
+          type="text"
+          formControlName="zip"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <p>Form Value: {{ profileForm.value | json }}</p>
+    <p>Form Status: {{ profileForm.status }}</p>
+
+    <p>Complete the form to enable button.</p>
+    <button
+      type="button"
+      (click)="updateSetProfile()"
+      class="btn btn-secondary"
+    >
+      Update Profile with setValue
+    </button>
+    <button
+      type="button"
+      (click)="updatePatchProfile()"
+      class="btn btn-secondary"
+    >
+      Update Profile with patchValue
+    </button>
+    <button
+      type="submit"
+      [disabled]="!profileForm.valid"
+      class="btn btn-primary"
+    >
+      Submit
+    </button>
+  </fieldset>
+</form>
+
+<form [formGroup]="profileForm2" (ngSubmit)="onSubmit2()">
+  <fieldset>
+    <legend>Profile Editor FormBuilder</legend>
+    <div class="mb-3">
+      <label for="first-name" class="form-label">First Name:</label>
+      <input
+        id="first-name"
+        type="text"
+        formControlName="firstName"
+        class="form-control"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="last-name" class="form-label">Last Name:</label>
+      <input
+        id="last-name"
+        type="text"
+        formControlName="lastName"
+        class="form-control"
+      />
+    </div>
+
+    <div formGroupName="address">
+      <legend>Address</legend>
+      <div class="mb-3">
+        <label for="street" class="form-label">Street: </label>
+        <input
+          id="street"
+          type="text"
+          formControlName="street"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="city" class="form-label">City: </label>
+        <input
+          id="city"
+          type="text"
+          formControlName="city"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="state" class="form-label">State: </label>
+        <input
+          id="state"
+          type="text"
+          formControlName="state"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="zip" class="form-label">Zip Code: </label>
+        <input
+          id="zip"
+          type="text"
+          formControlName="zip"
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div formArrayName="aliases">
+      <h2>Aliasess</h2>
+      <button type="button" (click)="addAlias()">+ Add another alias</button>
+
+      <div *ngFor="let alias of aliases.controls; let i = index">
+        <!-- The repeated alias template -->
+        <label for="alias-{{ i }}">Alias:</label>
+        <input id="alias-{{ i }}" type="text" [formControlName]="i" />
+      </div>
+    </div>
+
+    <p>Form Value: {{ profileForm.value | json }}</p>
+    <p>Form Status: {{ profileForm.status }}</p>
+
+    <p>Complete the form to enable button.</p>
+    <button
+      type="button"
+      (click)="updateSetProfile2()"
+      class="btn btn-secondary"
+    >
+      Update Profile with setValue
+    </button>
+    <button
+      type="button"
+      (click)="updatePatchProfile2()"
+      class="btn btn-secondary"
+    >
+      Update Profile with patchValue
+    </button>
+    <button
+      type="submit"
+      [disabled]="!profileForm.valid"
+      class="btn btn-primary"
+    >
+      Submit
+    </button>
+  </fieldset>
+</form>
