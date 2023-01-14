@@ -37,7 +37,18 @@ export class ProfileEditorComponent implements OnInit {
       state: [''],
       zip: [''],
     }),
-    aliases: this.fb.array([this.fb.control('')]),
+    aliases: this.fb.array([]),
+  });
+
+  profileForm3 = this.fb.group({
+    fields: this.fb.array([]),
+    userInfos: this.fb.array([]),
+  });
+
+  userInfosFields = this.fb.group({
+    age: [12],
+    size: ['1m80'],
+    country: ['france'],
   });
 
   constructor(private fb: FormBuilder) {}
@@ -104,5 +115,26 @@ export class ProfileEditorComponent implements OnInit {
 
   addAlias() {
     this.aliases.push(this.fb.control(''));
+  }
+
+  get fields() {
+    return this.profileForm3.get('fields') as FormArray;
+  }
+
+  addFields() {
+    this.fields.push(this.fb.control(''));
+  }
+
+  get userInfos() {
+    return this.profileForm3.get('userInfos') as FormArray;
+  }
+
+  addUserInfos() {
+    this.userInfos.push(this.userInfosFields);
+  }
+
+  onSubmit3() {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.profileForm3.value);
   }
 }

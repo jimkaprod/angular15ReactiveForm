@@ -190,3 +190,58 @@
     </button>
   </fieldset>
 </form>
+
+<form [formGroup]="profileForm3" (ngSubmit)="onSubmit3()">
+  <fieldset>
+    <div formArrayName="fields">
+      <h2>Fields</h2>
+      <button type="button" (click)="addFields()">+ Add another alias</button>
+
+      <div *ngFor="let fields of fields.controls; let i = index">
+        <!-- The repeated fields template -->
+        <label for="fields-{{ i }}">fields:</label>
+        <input id="fields-{{ i }}" type="text" [formControlName]="i" />
+      </div>
+    </div>
+
+    <div formArrayName="userInfos">
+      <h2>Fields</h2>
+      <button type="button" (click)="addUserInfos()">+ Add user infos</button>
+
+      -->
+      {{ userInfos.controls }}
+      <--
+      <div
+        *ngFor="let userForm of userInfos.controls; let i = index"
+        [formGroupName]="i"
+      >
+        {{ i }}
+        xoxo{{ userForm }}oxox
+        <input id="name" type="text" formControlName="age" />
+        <input id="email" type="text" formControlName="size" />
+        <input id="email" type="text" formControlName="country" />
+      </div>
+    </div>
+    <button
+      type="button"
+      (click)="updateSetProfile2()"
+      class="btn btn-secondary"
+    >
+      Update Profile with setValue
+    </button>
+    <button
+      type="button"
+      (click)="updatePatchProfile2()"
+      class="btn btn-secondary"
+    >
+      Update Profile with patchValue
+    </button>
+    <button
+      type="submit"
+      [disabled]="!profileForm.valid"
+      class="btn btn-primary"
+    >
+      Submit
+    </button>
+  </fieldset>
+</form>

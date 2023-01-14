@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './core/home/home.component';
+import { QuestionService } from './questionnaire/services/question.service';
 
 export const APP_ROUTES: Routes = [
   {
@@ -24,10 +25,13 @@ export const APP_ROUTES: Routes = [
   //   loadChildren: () => import('./mailbox/mailbox.routes'),
   // },
   // Option 2: Directly Lazy Loading a Standalone Component
-  // {
-  //   path: 'user',
-  //   title: 'User',
-  //   loadComponent: () =>
-  //     import('./user/user.component').then((m) => m.UserComponent),
-  // },
+  {
+    path: 'questionnaire',
+    title: 'User',
+    providers: [QuestionService],
+    loadComponent: () =>
+      import(
+        './questionnaire/questionnaire-home/questionnaire-home.component'
+      ).then((m) => m.QuestionnaireHomeComponent),
+  },
 ];
