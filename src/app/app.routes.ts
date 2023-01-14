@@ -34,4 +34,13 @@ export const APP_ROUTES: Routes = [
         './questionnaire/questionnaire-home/questionnaire-home.component'
       ).then((m) => m.QuestionnaireHomeComponent),
   },
+  {
+    path: 'typed-form',
+    title: 'TypedForm',
+    providers: [],
+    loadComponent: () =>
+      import('./typedForm/typed-form/typed-form.component').then(
+        (m) => m.TypedFormComponent
+      ),
+  },
 ];

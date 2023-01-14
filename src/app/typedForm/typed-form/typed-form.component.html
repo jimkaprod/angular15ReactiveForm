@@ -1,0 +1,21 @@
+<form [formGroup]="loginForm">
+  <div class="row">
+    <div class="col-6">
+      <label for="email" class="form-label">Email:</label>
+      <input type="text" formControlName="email" />
+    </div>
+    <div class="col-6">
+      <label for="password" class="form-label">Password:</label>
+      <input type="text" formControlName="password" />
+    </div>
+    <div class="col-6"></div>
+  </div>
+  <div class="mt-5">
+    <button type="button" (click)="reset()" class="btn btn-secondary">
+      Reset
+    </button>
+    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">
+      Submit
+    </button>
+  </div>
+</form>
