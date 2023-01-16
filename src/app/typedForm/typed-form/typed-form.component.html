@@ -17,5 +17,8 @@
     <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">
       Submit
     </button>
+    <p>
+      {{ loginForm.value | json }}
+    </p>
   </div>
 </form>

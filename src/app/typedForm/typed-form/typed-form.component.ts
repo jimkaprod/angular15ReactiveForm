@@ -1,10 +1,11 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-Validators,
+  Validators,
 } from '@angular/forms';
 
 interface LoginForm {
@@ -17,17 +18,21 @@ interface LoginForm {
   templateUrl: './typed-form.component.html',
   styleUrls: ['./typed-form.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, JsonPipe],
 })
 export class TypedFormComponent implements OnInit {
-
   loginForm = this.fb.group<LoginForm>({
-    email: this.fb.control('', { nonNullable: true, validators: [Validators.required] }),
+    email: this.fb.control('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
     password: this.fb.control('', { nonNullable: true }),
   });
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {}
 
-  reset() {}
+  reset() {
+    this.loginForm.reset();
+  }
 }
