@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './core/home/home.component';
 import { QuestionService } from './questionnaire/services/question.service';
+import { FieldsControlService } from './typedForm/services/fields-control.service';
+import { FieldsService } from './typedForm/services/fields.service';
 
 export const APP_ROUTES: Routes = [
   {
@@ -37,7 +39,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'typed-form',
     title: 'TypedForm',
-    providers: [],
+    providers: [FieldsService],
     loadComponent: () =>
       import('./typedForm/typed-form/typed-form.component').then(
         (m) => m.TypedFormComponent
