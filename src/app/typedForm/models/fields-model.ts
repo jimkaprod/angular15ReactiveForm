@@ -14,3 +14,10 @@ export interface FieldsModel {
   type?: string;
   options?: { key: string; value: string }[];
 }
+
+export interface FieldsAbstractModel {
+  controlType?: FieldsTypes;
+  key: string;
+  label: string;
+  order: number;
+}
