@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { FieldsTypes } from '../../typedForm/enums/fields-types.enum';
 
 export interface TextboxModel {
@@ -16,6 +17,19 @@ export interface FieldsModel {
 }
 
 export interface FieldsAbstractModel {
+  _controlType?: FieldsTypes;
+  _key: string;
+  _label: string;
+  _order: number;
+  _formGroup: FormGroup;
+}
+
+export interface FieldModel {
+  data: FieldDataModel;
+  formGroup: FormGroup;
+}
+
+export interface FieldDataModel {
   controlType?: FieldsTypes;
   key: string;
   label: string;

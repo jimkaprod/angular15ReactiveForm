@@ -20,6 +20,7 @@ import { FieldsModel } from '../../typedForm/models/fields-model';
 import { FieldsControlService } from '../../typedForm/services/fields-control.service';
 import { FieldsService } from '../../typedForm/services/fields.service';
 import { FieldsTypes } from '../../typedForm/enums/fields-types.enum';
+import { TextboxDirective } from '../../typedForm/typed-form/field.directive';
 
 interface LoginForm {
   email?: FormControl<string>;
@@ -31,7 +32,7 @@ interface LoginForm {
   templateUrl: './typed-form.component.html',
   styleUrls: ['./typed-form.component.css'],
   standalone: true,
-  providers: [FieldsControlService],
+  providers: [FieldsControlService, FieldsService],
   imports: [
     ReactiveFormsModule,
     JsonPipe,
@@ -40,10 +41,10 @@ interface LoginForm {
     AsyncPipe,
     NgSwitchCase,
     NgIf,
+    TextboxDirective,
   ],
 })
 export class TypedFormComponent implements OnInit {
-  fields$: Observable<FieldsModel[]>;
   formFields!: FormGroup;
 
   fieldsTypes = FieldsTypes;
@@ -60,17 +61,18 @@ export class TypedFormComponent implements OnInit {
     private fieldsService: FieldsService,
     private fieldsControlService: FieldsControlService
   ) {
-    this.fields$ = fieldsService.getFields();
+    this.formFields = fieldsService.getFields();
+    console.log('FIELDS------');
+    console.log(this.formFields?.controls?.fields['controls']);
   }
 
   async ngOnInit() {
-    this.formFields = this.fieldsControlService.toFormGroup(
-      await lastValueFrom(this.fields$)
-    );
-
-    this.fields$.subscribe((res) => {
-      console.log('res>>>>', res);
-    });
+    // this.formFields = this.fieldsControlService.toFormGroup(
+    //   await lastValueFrom(this.fields)
+    // );
+    // this.fields.subscribe((res) => {
+    //   console.log('res>>>>', res);
+    // });
   }
 
   reset() {
@@ -79,5 +81,22 @@ export class TypedFormComponent implements OnInit {
 
   onSubmitFields() {
     console.log(this.formFields.value);
+  }
+
+  getFieldLabelValue(formGroup: FormGroup, index: number): any {
+    // console.log('++++++++++++++++++++++++++');
+    // console.log(formGroup);
+    // console.log('++++++++++++++++++++++++++');
+    return Object.keys(formGroup.controls).forEach((key) => {
+      return { key: formGroup.controls[key] };
+    });
+  }
+
+  get fields() {
+    console.log(this.formFields);
+    console.log(this.formFields?.controls);
+    console.log(this.formFields?.controls?.fields);
+    console.log('-----');
+    return this.formFields?.controls?.fields['controls'];
   }
 }

@@ -24,7 +24,17 @@
 </form>
 
 <form *ngIf="formFields" [formGroup]="formFields" (ngSubmit)="onSubmitFields()">
-  <div *ngFor="let field of fields$ | async" class="form-row">
+  <div formArrayName="fields">
+    <div *ngFor="let field of fields; let i = index">
+      {{ field }}
+      <div [ngSwitch]="field.controlType">
+        <div *ngSwitchCase="fieldsTypes.TEXTBOX" [appTextbox]="field"></div>
+      </div>
+      <label for="field-{{ i }}">: {{ field.controls.status }}</label>
+      <!-- <input id="field-{{ i }}" type="text" [formControlName]="i" /> -->
+    </div>
+  </div>
+  <!-- <div *ngFor="let field of fields.controls" class="form-row">
     {{ field.controlType }}
     <div [ngSwitch]="field.controlType">
       <input
@@ -44,6 +54,6 @@
     </select>
     </div>
     
-  </div>
+  </div> -->
   <button type="submit" [disabled]="!formFields.valid">Save</button>
 </form>
